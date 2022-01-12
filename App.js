@@ -1,20 +1,44 @@
-import React, {Component} from 'react';
-import {View,Text} from 'react-native';
+import 'react-native-gesture-handler';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Image } from 'react-native';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: "Translation"
-    };
+const Tab = createBottomTabNavigator();
+
+import Translate from './Translate';
+import Detect from './Detect';
+
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator >
+        <Tab.Screen
+          name="Translate"
+          component={Translate}
+          options={{
+            tabBarIcon: () => (<Image source={require("./assets/translate.png")} style={{width: 20, height: 20}} />),
+            headerStyle: {
+                backgroundColor: '#5390f5',
+            },
+            headerTintColor: '#fff',
+        }}
+        />
+        <Tab.Screen
+          name="Detect"
+          component={Detect}
+          options={{
+            tabBarIcon: () => (<Image source={require("./assets/lupa.png")} style={{width: 20, height: 20}} />),
+            headerStyle: {
+                backgroundColor: '#5390f5',
+            },
+            headerTintColor: '#fff',
+        }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
 }
-render() {
-  const title = this.state.title;
-    return (
-      <View>
-        <Text>{title}</Text>
-      </View>
-    );
-  }
-}
+
 export default App;
