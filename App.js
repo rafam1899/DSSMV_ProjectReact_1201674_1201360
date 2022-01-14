@@ -6,8 +6,9 @@ import { Image } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
-import Translate from './Translate';
-import Detect from './Detect';
+import Translate from './screens/Translate';
+import Detect from './screens/Detect';
+
 
 
 function App() {
