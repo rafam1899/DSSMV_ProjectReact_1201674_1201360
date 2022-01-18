@@ -8,37 +8,38 @@ const Tab = createBottomTabNavigator();
 
 import Translate from './screens/Translate';
 import Detect from './screens/Detect';
-
-
+import AppProvider from './context/AppProvider';
 
 function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator >
-        <Tab.Screen
-          name="Translate"
-          component={Translate}
-          options={{
-            tabBarIcon: () => (<Image source={require("./assets/translate.png")} style={{width: 20, height: 20}} />),
-            headerStyle: {
-                backgroundColor: '#5390f5',
-            },
-            headerTintColor: '#fff',
-        }}
-        />
-        <Tab.Screen
-          name="Detect"
-          component={Detect}
-          options={{
-            tabBarIcon: () => (<Image source={require("./assets/lupa.png")} style={{width: 20, height: 20}} />),
-            headerStyle: {
-                backgroundColor: '#5390f5',
-            },
-            headerTintColor: '#fff',
-        }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <AppProvider>
+      <NavigationContainer>
+        <Tab.Navigator >
+          <Tab.Screen
+            name="Translate"
+            component={Translate}
+            options={{
+              tabBarIcon: () => (<Image source={require("./assets/translate.png")} style={{width: 20, height: 20}} />),
+              headerStyle: {
+                  backgroundColor: '#5390f5',
+              },
+              headerTintColor: '#fff',
+          }}
+          />
+          <Tab.Screen
+            name="Detect"
+            component={Detect}
+            options={{
+              tabBarIcon: () => (<Image source={require("./assets/lupa.png")} style={{width: 20, height: 20}} />),
+              headerStyle: {
+                  backgroundColor: '#5390f5',
+              },
+              headerTintColor: '#fff',
+          }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </AppProvider>
   );
 }
 
