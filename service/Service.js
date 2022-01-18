@@ -17,7 +17,7 @@ export function makeHTTPRequest(url, request, key, location, text, from, to, suc
     params: {
         'api-version': '3.0',
         'from': from,
-        'to': to
+        'to': [to]
     },
     data: [{
         'text': text
@@ -27,7 +27,7 @@ export function makeHTTPRequest(url, request, key, location, text, from, to, suc
     .then(function(response){
       Alert.alert("Alert Title");
       Alert.alert(JSON.stringify(response.data, null, 4));
-      success(response)
+      success(response);
     })
     .catch(function(response){
       Alert.alert(" " + response);

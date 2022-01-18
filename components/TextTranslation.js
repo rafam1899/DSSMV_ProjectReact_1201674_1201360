@@ -22,7 +22,7 @@ const TextTranslation = () => {
             const location = `${LOCATION}`;
             const request = {};
             fetchTranslation(url, request, key, location, texto, from, to, dispatch);
-            setTraducao(texto.length);
+            setTraducao(texto);
     }
 
     return (

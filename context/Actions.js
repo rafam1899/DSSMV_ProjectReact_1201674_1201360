@@ -1,9 +1,9 @@
 
 import { makeHTTPRequest } from '../service/Service';
 
-export const URL_API = 'https://api.cognitive.microsofttranslator.com';
-export const KEY = "1fc0bc19025d4c6a8df46a1b3b9bbd62";
-export const LOCATION = "northeurope";
+export const URL_API = "https://api.cognitive.microsofttranslator.com";
+export const KEY = "ed5cc29c2e6a40acb057e4074bcd770a";
+export const LOCATION = "global";
 
 export const FETCH_TRANSLATION_STARTED = 'FETCH_TRANSLATION_STARTED';
 export const FETCH_TRANSLATION_SUCCESS = 'FETCH_TRANSLATION_SUCCESS';
