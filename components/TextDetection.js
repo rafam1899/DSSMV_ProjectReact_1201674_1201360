@@ -123,7 +123,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius:20,
         margin:10,
-        borderColor:'blue'
+        borderColor:'#1a73e9',
+        marginTop:50
     }
       
 });

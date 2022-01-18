@@ -55,7 +55,7 @@ const TextTranslation = () => {
                     </Picker>
                 </View>
                 <View style={{flex:0.3}}>
-                    <Image source={require("../assets/switch.png")} style={{width: 20, height: 20, marginTop:25,margin:10}} />
+                    <Image source={require("../assets/switch.png")} style={{width: 20, height: 20, marginTop:25,margin:12}} />
                 </View>
                 <View style={styles.picker_border} >
                     <Picker
@@ -126,7 +126,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius:20,
         margin:10,
-        borderColor:'blue'
+        borderColor:'#1a73e9',
+        marginTop:50
     }
       
 });
