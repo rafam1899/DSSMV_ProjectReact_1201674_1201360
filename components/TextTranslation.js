@@ -14,15 +14,18 @@ const TextTranslation = () => {
     
     const { loading, error, data } = text;
 
-    function TestFunction() {
-        
+    const onPress = () => {
         dispatch(fetchTranslationStarted());
-            const url = `${URL_API}`;
-            const key = `${KEY}`;
-            const location = `${LOCATION}`;
-            const request = {};
-            fetchTranslation(url, request, key, location, texto, from, to, dispatch);
-            setTraducao(texto);
+        const url = `${URL_API}`;
+        const key = `${KEY}`;
+        const location = `${LOCATION}`;
+        fetchTranslation(url, key, location, texto, from, to, dispatch);
+
+        if(data.length > 0) {
+            setTraducao(data[0].translations[0].text);
+        } else {
+            setTraducao("error");
+        }
     }
 
     return (
@@ -52,7 +55,7 @@ const TextTranslation = () => {
                     </Picker>
                 </View>
                 <View style={{flex:0.3}}>
-                    <Image source={require("../assets/switch.png")} style={{width: 20, height: 20, marginTop:25}} />
+                    <Image source={require("../assets/switch.png")} style={{width: 20, height: 20, marginTop:25,margin:10}} />
                 </View>
                 <View style={styles.picker_border} >
                     <Picker
@@ -81,7 +84,7 @@ const TextTranslation = () => {
             
             <TouchableHighlight
                 style={styles.button}
-                onPress={ () => TestFunction() }
+                onPress={onPress}
                 ><Text style={{textAlign:'center',color:'#fff'}}>Translate</Text>
             </TouchableHighlight>
         </View>

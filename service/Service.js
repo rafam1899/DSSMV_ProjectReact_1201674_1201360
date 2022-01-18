@@ -1,8 +1,7 @@
 import { Alert } from "react-native";
 
-export function makeHTTPRequest(url, request, key, location, text, from, to, success, failure) {
+export function makeHTTPRequest(url, key, location, text, from, to, success, failure) {
   const axios = require('axios').default;
-  const { v4: uuidv4 } = require('uuid');
   
   axios({
     baseURL: url,
@@ -11,8 +10,7 @@ export function makeHTTPRequest(url, request, key, location, text, from, to, suc
     headers: {
         'Ocp-Apim-Subscription-Key': key,
         'Ocp-Apim-Subscription-Region': location,
-        'Content-type': 'application/json',
-        'X-ClientTraceId': uuidv4.toString()
+        'Content-type': 'application/json'
     },
     params: {
         'api-version': '3.0',
@@ -24,14 +22,21 @@ export function makeHTTPRequest(url, request, key, location, text, from, to, suc
     }],
     responseType: 'json'
   })
-    .then(function(response){
-      Alert.alert("Alert Title");
-      Alert.alert(JSON.stringify(response.data, null, 4));
-      success(response);
-    })
-    .catch(function(response){
-      Alert.alert(" " + response);
-      failure(response);
-    });
+  .then(function(response){
+      success(response.data);
+  })
+  .catch(function (error) {
+      failure(error);
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      console.log(error.request);
+    } else {
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
 }
 
