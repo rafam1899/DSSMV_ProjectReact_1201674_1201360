@@ -71,7 +71,7 @@ const TextTranslation = () => {
                     </Picker>
                 </View>
             </View>
-            <TextInput style = {{color: '#fff', borderColor: '#000000',borderWidth: 1,borderRadius:20,margin:10,borderColor:'#ffffff', backgroundColor:'#1a73e9'}}
+            <TextInput style = {{color: '#fff', borderColor: '#000000',borderWidth: 1,borderRadius:20,margin:10,borderColor:'#ffffff', backgroundColor:'#1b79f5'}}
                 underlineColorAndroid = "transparent"
                 value={(traducao)}
                 multiline
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         margin:10,
         borderColor:'#ffffff',
-        backgroundColor:'#1a73e9'
+        backgroundColor:'#1b79f5'
     },
     item: {
         borderTopWidth: 2,
@@ -123,10 +123,10 @@ const styles = StyleSheet.create({
     insere_text: {
         color: '#000', 
         borderColor: '#000000',
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius:20,
         margin:10,
-        borderColor:'#1a73e9',
+        borderColor:'#1b79f5',
         marginTop:50
     }
       

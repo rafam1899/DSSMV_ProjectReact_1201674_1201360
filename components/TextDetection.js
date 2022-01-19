@@ -56,7 +56,7 @@ const TextDetection = () => {
             <View style={{flexDirection: 'row'}}></View>
 
             <View style={{flexDirection: 'row'}}>
-                <TextInput style = {{flex: 1, color: '#fff',borderWidth: 1,borderRadius:20,margin:10,borderColor:'#ffffff', backgroundColor:'#1a73e9', textAlign:'center'}}
+                <TextInput style = {styles.language}
                     underlineColorAndroid = "transparent"
                     value={(detecao)}
                     numberOfLines={1}
@@ -65,7 +65,7 @@ const TextDetection = () => {
                     editable={false} 
                     selectTextOnFocus={false}
                 />
-                <TextInput style = {{flex: 1, color: '#fff', borderColor: '#000000',borderWidth: 1,borderRadius:20,margin:10,borderColor:'#ffffff', backgroundColor:'#1a73e9', textAlign:'center'}}
+                <TextInput style = {styles.language}
                     underlineColorAndroid = "transparent"
                     value={(acerto)}
                     numberOfLines={1}
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         margin:10,
         borderColor:'#ffffff',
-        backgroundColor:'#1a73e9'
+        backgroundColor:'#1b79f5'
     },
     item: {
         borderTopWidth: 2,
@@ -99,11 +99,21 @@ const styles = StyleSheet.create({
     insere_text: {
         color: '#000', 
         borderColor: '#000000',
+        borderWidth: 2,
+        borderRadius:20,
+        margin:10,
+        borderColor:'#1b79f5',
+        marginTop:50
+    },
+    language: {
+        flex: 1, 
+        color: '#fff',
         borderWidth: 1,
         borderRadius:20,
         margin:10,
-        borderColor:'#1a73e9',
-        marginTop:50
+        borderColor:'#ffffff', 
+        backgroundColor:'#1b79f5', 
+        textAlign:'center'
     }
       
 });
