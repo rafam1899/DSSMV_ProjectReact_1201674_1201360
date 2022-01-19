@@ -8,7 +8,7 @@ function Detect(props) {
     return (
         <View>
             <View style={styles.header}>
-            <Text style={styles.text}>Detect</Text>
+            <Text style={styles.text}>Detect Language</Text>
             </View>
             <ScrollView>
                 <TextDetection />

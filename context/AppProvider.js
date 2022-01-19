@@ -10,6 +10,11 @@ const initialState = {
     error: null,
     data: [],
   },
+  language: {
+    loading: true,
+    error: null,
+    data: [],
+  }
 };
 
 const AppProvider = (props) => {
