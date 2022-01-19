@@ -21,6 +21,25 @@ export function makeHTTPRequest(url, key, location, text, from, to, success, fai
         'text': text
     }],
     responseType: 'json'
+  },
+  {
+    baseURL: url,
+    url: '/detect',
+    method: 'post',
+    headers: {
+        'Ocp-Apim-Subscription-Key': key,
+        'Ocp-Apim-Subscription-Region': location,
+        'Content-type': 'application/json'
+    },
+    params: {
+        'api-version': '3.0',
+        'from': from,
+        'to': [to]
+    },
+    data: [{
+        'text': text
+    }],
+    responseType: 'json'
   })
   .then(function(response){
       success(response.data);
