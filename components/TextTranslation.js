@@ -32,7 +32,7 @@ const TextTranslation = () => {
     return (
         <View style={styles.all}>
             <View style={[styles.card, styles.shadowProp]}>
-                <TextInput
+                <TextInput style={styles.insere_text}
                 underlineColorAndroid = "transparent"
                 placeholderTextColor = "#000"
                 placeholder = "Texto"
@@ -127,12 +127,7 @@ const styles = StyleSheet.create({
         flex:1
     },
     insere_text: {
-        color: '#000', 
-        borderColor: '#000000',
-        borderWidth: 2,
-        borderRadius:8,
-        borderColor:'#1b79f5',
-        marginTop:50
+        color: '#000'
     },
     shadowProp: {
         shadowColor: "#000",
