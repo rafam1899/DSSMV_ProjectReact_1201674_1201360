@@ -30,7 +30,7 @@ const TextDetection = () => {
     return (
         <View style={styles.all}>
             <View style={[styles.card, styles.shadowProp]}>
-                <TextInput
+                <TextInput style={styles.insere_text}
                     underlineColorAndroid = "transparent"
                     placeholderTextColor = "#000"
                     placeholder = "Texto"
@@ -96,11 +96,7 @@ const styles = StyleSheet.create({
         borderColor: "black"
     },
     insere_text: {
-        color: '#000', 
-        borderColor: '#000000',
-        borderRadius:8,
-        borderColor:'#1b79f5',
-        marginTop:50
+        color: '#000'
     },
     language: {
         flex: 1, 
