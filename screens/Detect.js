@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 function Detect(props) {
     return (
-        <View>
+        <View style={styles.view}>
             <View style={styles.header}>
             <Text style={styles.text}>Detect Language</Text>
             </View>
@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
         fontSize:20,
         fontWeight:'bold',
         color:'#ffff'
+    },
+    view: {
+        height:'100%'
     }
 });
 export default Detect;

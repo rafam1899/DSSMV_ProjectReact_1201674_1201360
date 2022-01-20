@@ -8,7 +8,7 @@ import { color } from 'react-native-reanimated';
 function Translate(props) {
 
     return (
-        <View>
+        <View style={styles.view}>
             <View style={styles.header}>
              <Text style={styles.text}>Translate</Text>
                 </View>
@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
         fontSize:20,
         fontWeight:'bold',
         color:'#ffff'
+    },
+    view: {
+        height:'100%'
     }
 });
 export default Translate;

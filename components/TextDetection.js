@@ -28,35 +28,37 @@ const TextDetection = () => {
     }
 
     return (
-        <View>
-            <TextInput style = {styles.insere_text}
-            underlineColorAndroid = "transparent"
-            placeholderTextColor = "#000"
-            placeholder = "Texto"
-            multiline = {true}
-            numberOfLines={10}
-            autoCapitalize = "none"
-            onChangeText={(text) => this.texto = text}
-            />
+        <View style={styles.all}>
+            <View style={[styles.card, styles.shadowProp]}>
+                <TextInput
+                    underlineColorAndroid = "transparent"
+                    placeholderTextColor = "#000"
+                    placeholder = "Texto"
+                    multiline = {true}
+                    numberOfLines={10}
+                    autoCapitalize = "none"
+                    onChangeText={(text) => this.texto = text}
+                />
+            </View>
+           
 
-            <View style ={{margin:20}}></View>
+            <View style ={{margin:10}}></View>
 
             <TouchableHighlight
-                style={styles.button}
+                style={[styles.shadowProp, styles.card,styles.button]}
                 onPress={onPress}
-                ><Text style={{textAlign:'center',color:'#fff'}}>Detect</Text>
+                ><Text style={{textAlign:'center',color:'#fff',fontSize: 20,}}>Detect</Text>
             </TouchableHighlight>
 
-            <View style ={{margin:20}}></View>
+            <View style ={{margin:10}}></View>
 
             <View style={{flexDirection: 'row'}}>
-                <Text style = {{flex: 1, color: 'black',borderWidth: 0,borderRadius:20,margin:5, textAlign:'center', fontWeight:'500'}}>Language</Text>
-                <Text style = {{flex: 1, color: 'black',borderWidth: 0,borderRadius:20,margin:5, textAlign:'center', fontWeight:'500'}}>Score</Text>
+                <Text style = {{flex: 1, color: 'black',borderWidth: 0,borderRadius:20,margin:5, textAlign:'center', fontWeight:'500', fontSize: 18}}>Language</Text>
+                <Text style = {{flex: 1, color: 'black',borderWidth: 0,borderRadius:20,margin:5, textAlign:'center', fontWeight:'500', fontSize: 18}}>Score</Text>
             </View>
-            <View style={{flexDirection: 'row'}}></View>
 
             <View style={{flexDirection: 'row'}}>
-                <TextInput style = {styles.language}
+                <TextInput style={[styles.card, styles.shadowProp, styles.language]}
                     underlineColorAndroid = "transparent"
                     value={(detecao)}
                     numberOfLines={1}
@@ -65,7 +67,7 @@ const TextDetection = () => {
                     editable={false} 
                     selectTextOnFocus={false}
                 />
-                <TextInput style = {styles.language}
+                <TextInput style={[styles.card, styles.shadowProp, styles.language]}
                     underlineColorAndroid = "transparent"
                     value={(acerto)}
                     numberOfLines={1}
@@ -74,8 +76,8 @@ const TextDetection = () => {
                     editable={false} 
                     selectTextOnFocus={false}
                 />
+                
             </View>
-            <View style={{flexDirection: 'row'}}></View>
         </View>
     );
 }
@@ -83,12 +85,9 @@ const TextDetection = () => {
 const styles = StyleSheet.create({
     button: {
         color: '#ffff',
-        borderWidth: 1,
-        borderRadius:20,
+        borderRadius:8,
         paddingTop: 20,
         paddingBottom: 20,
-        margin:10,
-        borderColor:'#ffffff',
         backgroundColor:'#1b79f5'
     },
     item: {
@@ -99,21 +98,39 @@ const styles = StyleSheet.create({
     insere_text: {
         color: '#000', 
         borderColor: '#000000',
-        borderWidth: 2,
-        borderRadius:20,
-        margin:10,
+        borderRadius:8,
         borderColor:'#1b79f5',
         marginTop:50
     },
     language: {
         flex: 1, 
         color: '#fff',
-        borderWidth: 1,
-        borderRadius:20,
-        margin:10,
-        borderColor:'#ffffff', 
+        borderRadius:8,
         backgroundColor:'#1b79f5', 
-        textAlign:'center'
+        textAlign:'center',
+        fontSize: 20,
+        width: '50%',
+        marginRight: 5,
+        marginLeft: 5
+    },
+    shadowProp: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.27,
+        shadowRadius: 4.65,
+
+        elevation: 6,
+      },
+    card: {
+        backgroundColor: 'white',
+        borderRadius: 8,
+        width: '100%',
+    },
+    all: {
+        margin: 20
     }
       
 });

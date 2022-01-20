@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, Image, TouchableHighlight, Alert } f
 import { URL_API, KEY, LOCATION, fetchTranslationStarted, fetchTranslation } from '../context/Actions';
 import AppContext from '../context/AppContext';
 import { Picker } from "@react-native-picker/picker";
+import { languages } from '../teste';
 
 const TextTranslation = () => {
     const [from, setFrom] = useState('Unknown');
@@ -29,19 +30,22 @@ const TextTranslation = () => {
     }
 
     return (
-        <View>
-            <TextInput style = {styles.insere_text}
-            underlineColorAndroid = "transparent"
-            placeholderTextColor = "#000"
-            placeholder = "Texto"
-            multiline = {true}
-            numberOfLines={10}
-            autoCapitalize = "none"
-            onChangeText={(text) => this.texto = text}
-            />
+        <View style={styles.all}>
+            <View style={[styles.card, styles.shadowProp]}>
+                <TextInput
+                underlineColorAndroid = "transparent"
+                placeholderTextColor = "#000"
+                placeholder = "Texto"
+                multiline = {true}
+                numberOfLines={10}
+                autoCapitalize = "none"
+                onChangeText={(text) => this.texto = text}
+                />
+            </View>
+            
 
-            <View style={{flexDirection:'row', margin:20}}>
-                <View style={styles.picker_border}>
+            <View style={{flexDirection:'row', marginBottom: 20, marginTop: 20}}>
+                <View style={[styles.picker_border,styles.card, styles.shadowProp]}>
                     <Picker
                         selectedValue={from}
                         onValueChange={(value, index) => setFrom(value)}
@@ -57,7 +61,7 @@ const TextTranslation = () => {
                 <View style={{flex:0.3}}>
                     <Image source={require("../assets/switch.png")} style={{width: 20, height: 20, marginTop:25,margin:12}} />
                 </View>
-                <View style={styles.picker_border} >
+                <View style={[styles.picker_border,styles.card, styles.shadowProp]} >
                     <Picker
                         selectedValue={to}
                         onValueChange={(value, index) => setTo(value)}
@@ -71,22 +75,26 @@ const TextTranslation = () => {
                     </Picker>
                 </View>
             </View>
-            <TextInput style = {{color: '#fff', borderColor: '#000000',borderWidth: 1,borderRadius:20,margin:10,borderColor:'#ffffff', backgroundColor:'#1b79f5'}}
-                underlineColorAndroid = "transparent"
-                value={(traducao)}
-                multiline
-                numberOfLines={10}
-                color = '#fff'
-                autoCapitalize = "none"
-                editable={false} 
-                selectTextOnFocus={false}
-            />
+            <View style={[styles.card, styles.shadowProp]}>
+                <TextInput 
+                    style={styles.resultado}
+                    underlineColorAndroid = "transparent"
+                    value={(traducao)}
+                    multiline
+                    numberOfLines={10}
+                    color = '#fff'
+                    autoCapitalize = "none"
+                    editable={false} 
+                    selectTextOnFocus={false}
+                />
+            </View>
             
             <TouchableHighlight
-                style={styles.button}
+                style={[styles.shadowProp, styles.card,styles.button]}
                 onPress={onPress}
-                ><Text style={{textAlign:'center',color:'#fff'}}>Translate</Text>
+                ><Text style={{textAlign:'center',color:'#fff',fontSize: 20}}>Translate</Text>
             </TouchableHighlight>
+            
         </View>
     );
 }
@@ -96,27 +104,25 @@ const styles = StyleSheet.create({
       marginVertical: 10,
       width: '100%',
       borderWidth: 1,
+      borderRadius: 8,
       borderColor: "#000",
       color: "#000",
     },
     button: {
         color: '#ffff',
-        borderWidth: 1,
-        borderRadius:20,
+        borderRadius:8,
         paddingTop: 20,
+        marginTop: 20,
         paddingBottom: 20,
-        margin:10,
-        borderColor:'#ffffff',
         backgroundColor:'#1b79f5'
     },
     item: {
-        borderTopWidth: 2,
-        borderBottomWidth: 2,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
         borderColor: "black"
     },
     picker_border: {
-        borderWidth: 1,
-        borderRadius:50,
+        borderRadius:8,
         width: '50%',
         flex:1
     },
@@ -124,10 +130,33 @@ const styles = StyleSheet.create({
         color: '#000', 
         borderColor: '#000000',
         borderWidth: 2,
-        borderRadius:20,
-        margin:10,
+        borderRadius:8,
         borderColor:'#1b79f5',
         marginTop:50
+    },
+    shadowProp: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.27,
+        shadowRadius: 4.65,
+
+        elevation: 6,
+      },
+    card: {
+        backgroundColor: 'white',
+        borderRadius: 8,
+        width: '100%',
+      },
+    resultado: {
+        color: '#fff',
+        borderRadius:8,
+        backgroundColor:'#1b79f5'
+    },
+    all: {
+        margin: 20
     }
       
 });
