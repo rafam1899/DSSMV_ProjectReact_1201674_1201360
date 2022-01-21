@@ -4,7 +4,6 @@ import { URL_API, KEY, LOCATION, fetchDetectionStarted, fetchDetection } from '.
 import AppContext from '../context/AppContext';
 
 const TextDetection = () => {
-    const payload = {texto: this.texto};
     const { state, dispatch } = useContext(AppContext);
     const { language } = state;
     
@@ -12,6 +11,7 @@ const TextDetection = () => {
 
     let detecao
     let acerto
+    let texto = ''
     
     const onPress = () => {
         if (texto.length == 0) {
@@ -50,7 +50,7 @@ const TextDetection = () => {
                     multiline = {true}
                     numberOfLines={10}
                     autoCapitalize = "none"
-                    onChangeText={(text) => this.texto = text}
+                    onChangeText={(text) => texto = text}
                 />
             </View>
            
