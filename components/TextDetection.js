@@ -4,13 +4,14 @@ import { URL_API, KEY, LOCATION, fetchDetectionStarted, fetchDetection } from '.
 import AppContext from '../context/AppContext';
 
 const TextDetection = () => {
-    const [detecao, setDetecao] = useState();
-    const [acerto, setAcerto] = useState();
     const payload = {texto: this.texto};
     const { state, dispatch } = useContext(AppContext);
     const { language } = state;
     
     const { loading, error, data } = language;
+
+    let detecao
+    let acerto
     
     const onPress = () => {
         if (texto.length == 0) {
@@ -21,15 +22,22 @@ const TextDetection = () => {
             const key = `${KEY}`;
             const location = `${LOCATION}`;
             fetchDetection(url, key, location, texto, dispatch);
-
-            if(data.length > 0) {
-                setDetecao(data[0].language);
-                setAcerto(data[0].score.toString());
+        }
+    }
+    if (loading === true) {
+        detecao = "";
+    }
+    else {
+        if (error !== null) {
+            detecao = "Error..."
+        } else {
+            if (data.length > 0) {
+                detecao = data[0].language;
+                acerto = data[0].score.toString();
             } else {
-                setDetecao("error");
+                detecao = "No translation";
             }
         }
-
     }
 
     return (
