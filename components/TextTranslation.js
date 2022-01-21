@@ -8,24 +8,33 @@ import { languages } from '../teste';
 const TextTranslation = () => {
     const [from, setFrom] = useState('Unknown');
     const [to, setTo] = useState('Unknown');
-    const [traducao, setTraducao] = useState();
-    const payload = {texto: this.texto, from: this.from, to: this.to};
+    const payload = {texto: this.texto};
     const { state, dispatch } = useContext(AppContext);
     const { text } = state;
     
     const { loading, error, data } = text;
-
+    let traducao;
+    
     const onPress = () => {
         dispatch(fetchTranslationStarted());
         const url = `${URL_API}`;
         const key = `${KEY}`;
         const location = `${LOCATION}`;
         fetchTranslation(url, key, location, texto, from, to, dispatch);
+    }
 
-        if(data.length > 0) {
-            setTraducao(data[0].translations[0].text);
+    if (loading === true) {
+        traducao = "";
+    }
+    else {
+        if (error !== null) {
+            traducao = "Error..."
         } else {
-            setTraducao("error");
+            if (data.length > 0) {
+                traducao = data[0].translations[0].text;
+            } else {
+                traducao = "No translation";
+            }
         }
     }
 

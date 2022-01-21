@@ -11,20 +11,25 @@ const TextDetection = () => {
     const { language } = state;
     
     const { loading, error, data } = language;
-
+    
     const onPress = () => {
-        dispatch(fetchDetectionStarted());
-        const url = `${URL_API}`;
-        const key = `${KEY}`;
-        const location = `${LOCATION}`;
-        fetchDetection(url, key, location, texto, dispatch);
-
-        if(data.length > 0) {
-            setDetecao(data[0].language);
-            setAcerto(data[0].score.toString());
+        if (texto.length == 0) {
+            Alert.alert("Insira um texto");
         } else {
-            setDetecao("error");
+            dispatch(fetchDetectionStarted());
+            const url = `${URL_API}`;
+            const key = `${KEY}`;
+            const location = `${LOCATION}`;
+            fetchDetection(url, key, location, texto, dispatch);
+
+            if(data.length > 0) {
+                setDetecao(data[0].language);
+                setAcerto(data[0].score.toString());
+            } else {
+                setDetecao("error");
+            }
         }
+
     }
 
     return (
