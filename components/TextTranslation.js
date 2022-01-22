@@ -1,6 +1,6 @@
-import React, {useState,useContext} from 'react';
+import React, {useState,useContext, useEffect} from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableHighlight, Alert } from 'react-native';
-import { URL_API, KEY, LOCATION, fetchTranslationStarted, fetchTranslation } from '../context/Actions';
+import { URL_API, URL_API_GET, KEY, LOCATION, fetchTranslationStarted, fetchTranslation, fetchListStarted, fetchList } from '../context/Actions';
 import AppContext from '../context/AppContext';
 import { Picker } from "@react-native-picker/picker";
 import { languages } from '../teste';
@@ -9,11 +9,35 @@ const TextTranslation = () => {
     const [from, setFrom] = useState('Unknown');
     const [to, setTo] = useState('Unknown');
     const payload = {texto: this.texto};
-    const { state, dispatch } = useContext(AppContext);
+    const { state, dispatch} = useContext(AppContext);
     const { text } = state;
-    
+    const { list } = state;
     const { loading, error, data } = text;
+    const { loading2, error2, data2 } = list;
+
     let traducao;
+
+    useEffect(() => {
+        dispatch(fetchListStarted());
+        const url = `${URL_API_GET}`;
+        const request = {};
+        fetchList(url, request, dispatch);
+        
+    }, []);
+
+    if (loading2 === true) {
+    }
+    else {
+        if (error2 !== null) {
+            Alert.alert("erro");
+        } else {
+            if (data2.length > 0) {
+                Alert.alert(JSON.stringify(data2));
+            } else {
+                Alert.alert("erro");
+            }
+        }
+    }
     
     const onPress = () => {
         dispatch(fetchTranslationStarted());
@@ -62,9 +86,8 @@ const TextTranslation = () => {
                         style={styles.picker}
                     >
                         <Picker.Item label="Language" value="Unknown" />
-                        <Picker.Item label="Ingles" value="en" />
-                        <Picker.Item label="Portugues" value="pt" />
-                        <Picker.Item label="Frances" value="fr" />
+                        
+                        
                     </Picker>
                 </View>
                 <View style={{flex:0.3}}>

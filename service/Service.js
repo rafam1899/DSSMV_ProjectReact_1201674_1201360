@@ -56,3 +56,12 @@ export function makeHTTPRequestDetect(url, key, location, text, success, failure
       failure(error);
   });
 }
+
+
+export function makeHTTPRequestList(url, request, success, failure) {
+    fetch(url, request)
+      .then(res => res.json())
+      .then(res => success(res))
+      .catch(err => failure(err.message))
+      ;
+  }
