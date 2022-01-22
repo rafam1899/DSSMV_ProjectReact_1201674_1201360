@@ -9,16 +9,12 @@ const initialState = {
     loading: true,
     error: null,
     data: [],
+    data2: [],
   },
   language: {
     loading: true,
     error: null,
     data: [],
-  },
-  list: {
-    loading2: true,
-    error2: null,
-    data2: [],
   }
 };
 

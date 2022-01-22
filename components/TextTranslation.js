@@ -11,9 +11,7 @@ const TextTranslation = () => {
     const payload = {texto: this.texto};
     const { state, dispatch} = useContext(AppContext);
     const { text } = state;
-    const { list } = state;
-    const { loading, error, data } = text;
-    const { loading2, error2, data2 } = list;
+    const { loading, error, data, data2 } = text;
 
     let traducao;
 
@@ -25,34 +23,25 @@ const TextTranslation = () => {
         
     }, []);
 
-    if (loading2 === true) {
-    }
-    else {
-        if (error2 !== null) {
-            Alert.alert("erro");
-        } else {
-            if (data2.length > 0) {
-                Alert.alert(JSON.stringify(data2));
-            } else {
-                Alert.alert("erro");
-            }
-        }
-    }
-    
     const onPress = () => {
         dispatch(fetchTranslationStarted());
         const url = `${URL_API}`;
         const key = `${KEY}`;
         const location = `${LOCATION}`;
-        fetchTranslation(url, key, location, texto, from, to, dispatch);
+        fetchTranslation(url, key, location, texto, "pt", to, dispatch);
     }
 
     if (loading === true) {
         traducao = "";
+        if(data2.length > 0) {
+            Alert.alert("fixe");
+        } else {
+            Alert.alert("nada");
+        }
     }
     else {
         if (error !== null) {
-            traducao = "Error..."
+            Alert.alert(error);
         } else {
             if (data.length > 0) {
                 traducao = data[0].translations[0].text;
@@ -86,8 +75,9 @@ const TextTranslation = () => {
                         style={styles.picker}
                     >
                         <Picker.Item label="Language" value="Unknown" />
-                        
-                        
+                        {Object.keys(data2).map((key) => {
+                            return (<Picker.Item label={this.props.data2.translation[key].name} value={this.props.data2.translation[key]} key={key}/>) //if you have a bunch of keys value pair
+                        })}
                     </Picker>
                 </View>
                 <View style={{flex:0.3}}>

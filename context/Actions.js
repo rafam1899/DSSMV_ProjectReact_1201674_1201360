@@ -10,13 +10,6 @@ export const URL_API_GET = "https://api.cognitive.microsofttranslator.com/langua
 export const FETCH_TRANSLATION_STARTED = 'FETCH_TRANSLATION_STARTED';
 export const FETCH_TRANSLATION_SUCCESS = 'FETCH_TRANSLATION_SUCCESS';
 export const FETCH_TRANSLATION_FAILURE = 'FETCH_TRANSLATION_FAILURE';
-export const FETCH_DETECTION_STARTED = 'FETCH_DETECTION_STARTED';
-export const FETCH_DETECTION_SUCCESS = 'FETCH_DETECTION_SUCCESS';
-export const FETCH_DETECTION_FAILURE = 'FETCH_DETECTION_FAILURE';
-export const FETCH_LIST_STARTED = 'FETCH_LIST_STARTED';
-export const FETCH_LIST_SUCCESS = 'FETCH_LIST_SUCCESS';
-export const FETCH_LIST_FAILURE = 'FETCH_LIST_FAILURE';
-
 
 export function fetchTranslation(url, key, location, text, from, to, dispatch) {
   //função ser executado em caso de sucesso
@@ -36,30 +29,17 @@ export function fetchDetection(url, key, location, text, dispatch) {
 
 export function fetchList(url, request, dispatch) {
   //função ser executado em caso de sucesso
+  //const success = (res) => Alert.alert(JSON.stringify(res));
   const success = (res) => dispatch(fetchListSuccess(res));
   //função ser executado em caso de falha
   const failure = (err) => dispatch(fetchListFailure(err.message));
+  //const failure = (err) => Alert.alert(err.message);
   makeHTTPRequestList(url, request, success, failure);
 }
-
 
 export function fetchTranslationStarted() {
   return {
     type: FETCH_TRANSLATION_STARTED,
-
-  }
-}
-
-export function fetchDetectionStarted() {
-  return {
-    type: FETCH_DETECTION_STARTED,
-
-  }
-}
-
-export function fetchListStarted() {
-  return {
-    type: FETCH_LIST_STARTED,
 
   }
 }
@@ -75,6 +55,26 @@ export function fetchTranslationSuccess(text) {
   }
 }
 
+export function fetchTranslationFailure(message) {
+  return {
+    type: FETCH_TRANSLATION_FAILURE,
+    payload: {
+      error: message
+    }
+  }
+}
+
+export const FETCH_DETECTION_STARTED = 'FETCH_DETECTION_STARTED';
+export const FETCH_DETECTION_SUCCESS = 'FETCH_DETECTION_SUCCESS';
+export const FETCH_DETECTION_FAILURE = 'FETCH_DETECTION_FAILURE';
+
+export function fetchDetectionStarted() {
+  return {
+    type: FETCH_DETECTION_STARTED,
+
+  }
+}
+
 export function fetchDetectionSuccess(text) {
   return {
     type: FETCH_DETECTION_SUCCESS,
@@ -85,30 +85,33 @@ export function fetchDetectionSuccess(text) {
 
   }
 }
-export function fetchListSuccess(text) {
-  return {
-    type: FETCH_LIST_SUCCESS,
-    payload: {
-      data:
-        [...text]
-    }
-
-  }
-}
-export function fetchTranslationFailure(message) {
-  return {
-    type: FETCH_TRANSLATION_FAILURE,
-    payload: {
-      error: message
-    }
-  }
-}
 
 export function fetchDetectionFailure(message) {
   return {
     type: FETCH_DETECTION_FAILURE,
     payload: {
       error: message
+    }
+  }
+}
+
+export const FETCH_LIST_STARTED = 'FETCH_LIST_STARTED';
+export const FETCH_LIST_SUCCESS = 'FETCH_LIST_SUCCESS';
+export const FETCH_LIST_FAILURE = 'FETCH_LIST_FAILURE';
+
+export function fetchListStarted() {
+  return {
+    type: FETCH_LIST_STARTED,
+
+  }
+}
+
+export function fetchListSuccess(list) {
+  return {
+    type: FETCH_LIST_SUCCESS,
+    payload: {
+      data2:
+        [...list]
     }
   }
 }
