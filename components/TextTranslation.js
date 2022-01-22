@@ -2,18 +2,24 @@ import React, {useState,useContext, useEffect} from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableHighlight, Alert } from 'react-native';
 import { URL_API, URL_API_GET, KEY, LOCATION, fetchTranslationStarted, fetchTranslation, fetchListStarted, fetchList } from '../context/Actions';
 import AppContext from '../context/AppContext';
-import { Picker } from "@react-native-picker/picker";
+
 import { languages } from '../teste';
+import PickerLanguage from './PickerLanguage' ;
 
 const TextTranslation = () => {
     const [from, setFrom] = useState('Unknown');
     const [to, setTo] = useState('Unknown');
     const payload = {texto: this.texto};
     const { state, dispatch} = useContext(AppContext);
-    const { text } = state;
-    const { loading, error, data, data2 } = text;
+    const { text, languages } = state;
 
     let traducao;
+
+    const handlePickers = (from,to) => {
+        setFrom(from);
+        setTo(to);
+        console.log("rec: " + from + " " + to)
+    }
 
     useEffect(() => {
         dispatch(fetchListStarted());
@@ -28,23 +34,19 @@ const TextTranslation = () => {
         const url = `${URL_API}`;
         const key = `${KEY}`;
         const location = `${LOCATION}`;
-        fetchTranslation(url, key, location, texto, "pt", to, dispatch);
+        fetchTranslation(url, key, location, texto, from, to, dispatch);
     }
 
-    if (loading === true) {
+    if (text.loading === true) {
         traducao = "";
-        if(data2.length > 0) {
-            Alert.alert("fixe");
-        } else {
-            Alert.alert("nada");
-        }
+        
     }
     else {
-        if (error !== null) {
-            Alert.alert(error);
+        if (text.error !== null) {
+            Alert.alert("Error..");
         } else {
-            if (data.length > 0) {
-                traducao = data[0].translations[0].text;
+            if (text.data.length > 0) {
+                traducao = text.data[0].translations[0].text;
             } else {
                 traducao = "No translation";
             }
@@ -64,39 +66,9 @@ const TextTranslation = () => {
                 onChangeText={(text) => this.texto = text}
                 />
             </View>
-            
-
-            <View style={{flexDirection:'row', marginBottom: 20, marginTop: 20}}>
-                <View style={[styles.picker_border,styles.card, styles.shadowProp]}>
-                    <Picker
-                        selectedValue={from}
-                        onValueChange={(value, index) => setFrom(value)}
-                        mode="dropdown" // Android only
-                        style={styles.picker}
-                    >
-                        <Picker.Item label="Language" value="Unknown" />
-                        {Object.keys(data2).map((key) => {
-                            return (<Picker.Item label={this.props.data2.translation[key].name} value={this.props.data2.translation[key]} key={key}/>) //if you have a bunch of keys value pair
-                        })}
-                    </Picker>
-                </View>
-                <View style={{flex:0.3}}>
-                    <Image source={require("../assets/switch.png")} style={{width: 20, height: 20, marginTop:25,margin:12}} />
-                </View>
-                <View style={[styles.picker_border,styles.card, styles.shadowProp]} >
-                    <Picker
-                        selectedValue={to}
-                        onValueChange={(value, index) => setTo(value)}
-                        mode="dropdown" // Android only
-                        style={styles.picker}
-                    >
-                        <Picker.Item label="Language" value="Unknown" />
-                        <Picker.Item label="Ingles" value="en" />
-                        <Picker.Item label="Portugues" value="pt" />
-                        <Picker.Item label="Frances" value="fr" />
-                    </Picker>
-                </View>
-            </View>
+            {!languages.loading && 
+                <PickerLanguage languages={languages} handlePickers={handlePickers} />
+            }
             <View style={[styles.card, styles.shadowProp]}>
                 <TextInput 
                     style={styles.resultado}

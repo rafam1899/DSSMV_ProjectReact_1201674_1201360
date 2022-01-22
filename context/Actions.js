@@ -29,11 +29,11 @@ export function fetchDetection(url, key, location, text, dispatch) {
 
 export function fetchList(url, request, dispatch) {
   //função ser executado em caso de sucesso
-  //const success = (res) => Alert.alert(JSON.stringify(res));
+  //const success = (res) => console.log(JSON.stringify(res));
   const success = (res) => dispatch(fetchListSuccess(res));
   //função ser executado em caso de falha
   const failure = (err) => dispatch(fetchListFailure(err.message));
-  //const failure = (err) => Alert.alert(err.message);
+  //const failure = (err) => console.log(err.message);
   makeHTTPRequestList(url, request, success, failure);
 }
 
@@ -110,8 +110,7 @@ export function fetchListSuccess(list) {
   return {
     type: FETCH_LIST_SUCCESS,
     payload: {
-      data2:
-        [...list]
+      data: list
     }
   }
 }

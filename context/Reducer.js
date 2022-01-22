@@ -20,7 +20,6 @@ function reducer(state, action) {
           loading: true,
           error: null,
           data: [],
-          data2:[]
         }
       }
     case FETCH_TRANSLATION_SUCCESS:
@@ -29,8 +28,7 @@ function reducer(state, action) {
         text: {
           loading: false,
           error: null,
-          data: [...action.payload.data],
-          data2:[]
+          data: [...action.payload.data]
         }
       }
     case FETCH_TRANSLATION_FAILURE:
@@ -40,7 +38,6 @@ function reducer(state, action) {
           loading: false,
           error: action.payload.error,
           data: [],
-          data2:[]
         }
       }
       case FETCH_DETECTION_STARTED:
@@ -73,31 +70,28 @@ function reducer(state, action) {
       case FETCH_LIST_STARTED:
       return {
         ...state,
-        text: {
+        languages: {
           loading: true,
           error: null,
-          data: [],
-          data2: []
+          data: null,
         }
       }
       case FETCH_LIST_SUCCESS:
       return {
         ...state,
-        text: {
-          loading: true,
+        languages: {
+          loading: false,
           error: null,
-          data: [],
-          data2: [...action.payload.data2]
+          data: action.payload.data
         }
       }
       case FETCH_LIST_FAILURE:
       return {
         ...state,
-        text: {
-          loading: true,
+        languages: {
+          loading: false,
           error: action.payload.error,
-          data: [],
-          data2: []
+          data: null,
         }
       }
     default:
