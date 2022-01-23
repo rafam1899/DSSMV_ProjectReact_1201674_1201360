@@ -43,7 +43,7 @@ const TextTranslation = () => {
     }
     else {
         if (text.error !== null) {
-            Alert.alert("Error..");
+            traducao = "Error..";
         } else {
             if (text.data.length > 0) {
                 traducao = text.data[0].translations[0].text;
