@@ -4,7 +4,9 @@ import { URL_API, KEY, LOCATION, fetchDetectionStarted, fetchDetection } from '.
 import AppContext from '../context/AppContext';
 
 const TextDetection = () => {
-    const payload = {texto: this.texto};
+    const [text, setText] = useState({
+        s: '',
+      });
     const { state, dispatch } = useContext(AppContext);
     const { language } = state;
     
@@ -14,14 +16,14 @@ const TextDetection = () => {
     let acerto
 
     const onPress = () => {
-        if (texto.length == 0) {
+        if (text.s.length == 0) {
             Alert.alert("Insira um texto");
         } else {
             dispatch(fetchDetectionStarted());
             const url = `${URL_API}`;
             const key = `${KEY}`;
             const location = `${LOCATION}`;
-            fetchDetection(url, key, location, texto, dispatch);
+            fetchDetection(url, key, location, text.s, dispatch);
         }
 
     }
@@ -53,7 +55,12 @@ const TextDetection = () => {
                     multiline = {true}
                     numberOfLines={10}
                     autoCapitalize = "none"
-                    onChangeText={(text) => this.texto = text}
+                    onChangeText={text =>
+                        setText(prevState => {
+                          return {...prevState, s: text};
+                        })
+                      }
+                    value={text.s}
                 />
             </View>
            

@@ -9,7 +9,9 @@ import PickerLanguage from './PickerLanguage' ;
 const TextTranslation = () => {
     const [from, setFrom] = useState('Unknown');
     const [to, setTo] = useState('Unknown');
-    const payload = {texto: this.texto};
+    const [texto, setTexto] = useState({
+        s: '',
+      });
     const { state, dispatch} = useContext(AppContext);
     const { text, languages } = state;
 
@@ -30,14 +32,14 @@ const TextTranslation = () => {
     }, []);
 
     const onPress = () => {
-        if (texto.length === 0) {
+        if (texto.s.length === 0) {
             Alert.alert("Insira um texto");
         } else {
             dispatch(fetchTranslationStarted());
             const url = `${URL_API}`;
             const key = `${KEY}`;
             const location = `${LOCATION}`;
-            fetchTranslation(url, key, location, texto, from, to, dispatch);
+            fetchTranslation(url, key, location, texto.s, from, to, dispatch);
         }
     }
 
@@ -67,7 +69,12 @@ const TextTranslation = () => {
                 multiline = {true}
                 numberOfLines={10}
                 autoCapitalize = "none"
-                onChangeText={(text) => this.texto = text}
+                onChangeText={texto =>
+                    setTexto(prevState => {
+                      return {...prevState, s: texto};
+                    })
+                  }
+                value={texto.s}
                 />
             </View>
             {!languages.loading && 
