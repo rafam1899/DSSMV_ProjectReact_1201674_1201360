@@ -30,11 +30,15 @@ const TextTranslation = () => {
     }, []);
 
     const onPress = () => {
-        dispatch(fetchTranslationStarted());
-        const url = `${URL_API}`;
-        const key = `${KEY}`;
-        const location = `${LOCATION}`;
-        fetchTranslation(url, key, location, texto, from, to, dispatch);
+        if (texto.length === 0) {
+            Alert.alert("Insira um texto");
+        } else {
+            dispatch(fetchTranslationStarted());
+            const url = `${URL_API}`;
+            const key = `${KEY}`;
+            const location = `${LOCATION}`;
+            fetchTranslation(url, key, location, texto, from, to, dispatch);
+        }
     }
 
     if (text.loading === true) {

@@ -4,14 +4,15 @@ import { URL_API, KEY, LOCATION, fetchDetectionStarted, fetchDetection } from '.
 import AppContext from '../context/AppContext';
 
 const TextDetection = () => {
-    const [detecao, setDetecao] = useState();
-    const [acerto, setAcerto] = useState();
     const payload = {texto: this.texto};
     const { state, dispatch } = useContext(AppContext);
     const { language } = state;
     
     const { loading, error, data } = language;
     
+    let detecao 
+    let acerto
+
     const onPress = () => {
         if (texto.length == 0) {
             Alert.alert("Insira um texto");
@@ -21,15 +22,25 @@ const TextDetection = () => {
             const key = `${KEY}`;
             const location = `${LOCATION}`;
             fetchDetection(url, key, location, texto, dispatch);
-
-            if(data.length > 0) {
-                setDetecao(data[0].language);
-                setAcerto(data[0].score.toString());
-            } else {
-                setDetecao("error");
-            }
         }
 
+    }
+
+    if (language.loading === true) {
+        detecao = "";
+    }
+    else {
+        if (language.error !== null) {
+            detecao = "Error..";
+        } else {
+            if (language.data.length > 0) {
+                detecao = data[0].language;
+                acerto = data[0].score.toString()
+
+            } else {
+                detecao = "No detecion";
+            }
+        }
     }
 
     return (
