@@ -20,7 +20,6 @@ const TextTranslation = () => {
     const handlePickers = (from,to) => {
         setFrom(from);
         setTo(to);
-        console.log("rec: " + from + " " + to)
     }
 
     useEffect(() => {

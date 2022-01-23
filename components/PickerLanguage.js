@@ -3,22 +3,12 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Picker } from "@react-native-picker/picker";
 
 const PickerLanguage = (props) => {
-    
-    const [from, setFrom] = useState('Unknown');
-    const [to, setTo] = useState('Unknown');
+    const [pickers, setPickers] = useState({
+        from: 'Unknown',
+        to: 'Unknown',
+});
 
-    const handleSelectFrom = (text) => {
-        setFrom(text);
-        if(from !== "Unknown" && to !== "Unknown") {
-            props.handlePickers(from, to);
-        }
-    }
-    const handleSelectTo = (text) => {
-        setTo(text);
-        if(from !== "Unknown" && to !== "Unknown") {
-            props.handlePickers(from, to);
-        }
-    }
+    props.handlePickers(pickers.from, pickers.to);
 
     const code = Object.keys(props.languages.data.translation);
 
@@ -28,9 +18,10 @@ const PickerLanguage = (props) => {
         <View style={{flexDirection:'row', marginBottom: 20, marginTop: 20}}>
                 <View style={[styles.picker_border,styles.card, styles.shadowProp]}>
                     <Picker
-                        selectedValue={from}
-                        onValueChange={(value, index) => handleSelectFrom(value)}
-                        mode="dropdown" // Android only
+                        selectedValue={pickers.from}
+                        onValueChange={value => setPickers(prevState => {
+                            return {...prevState, from: value};
+                          })}
                         style={styles.picker}
                     >
                         <Picker.Item label="Language" value="Unknown" />
@@ -46,9 +37,10 @@ const PickerLanguage = (props) => {
                 </View>
                 <View style={[styles.picker_border,styles.card, styles.shadowProp]} >
                     <Picker
-                        selectedValue={to}
-                        onValueChange={(value, index) => handleSelectTo(value)}
-                        mode="dropdown" // Android only
+                        selectedValue={pickers.to}
+                        onValueChange={value =>  setPickers(prevState => {
+                            return {...prevState, to: value};
+                        })}
                         style={styles.picker}
                     >
                         <Picker.Item label="Language" value="Unknown" />
