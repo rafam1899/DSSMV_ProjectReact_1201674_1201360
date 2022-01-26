@@ -6,7 +6,7 @@ const PickerLanguage = (props) => {
     const [pickers, setPickers] = useState({
         from: 'Unknown',
         to: 'Unknown',
-});
+    });
 
     props.handlePickers(pickers.from, pickers.to);
 

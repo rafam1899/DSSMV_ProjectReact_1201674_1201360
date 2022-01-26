@@ -58,6 +58,10 @@ const TextTranslation = () => {
         }
     }
 
+    if(text.s.length === 0) {
+        traducao = ''
+    }
+
     return (
         <View style={styles.all}>
             <View style={[styles.card, styles.shadowProp]}>
